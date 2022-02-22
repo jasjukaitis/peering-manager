@@ -8,6 +8,7 @@ from .models import (
     ConfigContextAssignment,
     ExportTemplate,
     JournalEntry,
+    RipeIrr,
     Tag,
     TaggedItem,
     Webhook,
@@ -19,6 +20,7 @@ __all__ = (
     "ExportTemplateTable",
     "IXAPITable",
     "JournalEntryTable",
+    "RipeIrrTable",
     "TagTable",
     "TaggedItemTable",
     "WebhookTable",
@@ -195,3 +197,12 @@ class WebhookTable(PeeringManagerTable):
             "http_method",
             "payload_url",
         )
+
+
+class RipeIrrTable(PeeringManagerTable):
+    name = tables.Column(linkify=True)
+
+    class Meta(PeeringManagerTable.Meta):
+        model = RipeIrr
+        fields = ("name",)
+        default_columns = ("name",)

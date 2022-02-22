@@ -323,6 +323,12 @@ if "radiusauth.backends.RADIUSBackend" in AUTHENTICATION_BACKENDS:
         ) from e
 
 
+
+# RIPE IRR
+RIPE_IRR_BASE_URL = getattr(
+    configuration, "RIPE_IRR_BASE_URL", "https://rest.db.ripe.net/RIPE/"
+)
+
 # Force PostgreSQL to be used as database backend
 configuration.DATABASE.update({"ENGINE": "django.db.backends.postgresql"})
 # Actually set the database's settings

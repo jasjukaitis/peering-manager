@@ -75,4 +75,12 @@ urlpatterns = [
         "webhooks/<int:pk>/",
         include(get_model_urls(app_label="extras", model_name="webhook")),
     ),
+    path(
+        "ripe-irr/",
+        include(get_model_urls(app_label="extras", model_name="ripeirr", detail=False)),
+    ),
+    path(
+        "ripe-irr/<int:pk>/",
+        include(get_model_urls(app_label="extras", model_name="ripeirr")),
+    ),
 ]

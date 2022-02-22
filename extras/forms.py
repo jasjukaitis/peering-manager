@@ -41,6 +41,7 @@ from .models import (
     ConfigContextAssignment,
     ExportTemplate,
     JournalEntry,
+    RipeIrr,
     Tag,
     Webhook,
 )
@@ -373,3 +374,18 @@ class WebhookFilterForm(BootstrapMixin, forms.Form):
         widget=StaticSelect(choices=BOOLEAN_WITH_BLANK_CHOICES),
         label="Object deletions",
     )
+
+
+class RipeIrrForm(BootstrapMixin, forms.ModelForm):
+    class Meta:
+        model = RipeIrr
+        fields = ("name", "password")
+
+
+class RipeIrrFilterForm(BootstrapMixin, forms.Form):
+    model = RipeIrr
+    q = forms.CharField(required=False, label="Search")
+
+
+class RipeIrrEntityUpdateForm(BootstrapMixin, forms.Form):
+    ripe_irr = forms.ModelChoiceField(queryset=RipeIrr.objects.all(), label="RIPE IRR")
