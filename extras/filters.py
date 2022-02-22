@@ -11,6 +11,7 @@ from .models import (
     ConfigContextAssignment,
     ExportTemplate,
     JobResult,
+    RipeIrr,
     Webhook,
 )
 
@@ -101,6 +102,17 @@ class JobResultFilterSet(BaseFilterSet):
         return queryset.filter(
             Q(name__icontains=value) | Q(user__username__icontains=value)
         )
+
+
+class RipeIrrFilterSet(BaseFilterSet):
+    q = django_filters.CharFilter(method="search", label="Search")
+
+    class Meta:
+        model = RipeIrr
+        fields = ["id", "name"]
+
+    def search(self, queryset, name, value):
+        return queryset
 
 
 class WebhookFilterSet(BaseFilterSet):

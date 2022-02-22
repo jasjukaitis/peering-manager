@@ -16,7 +16,7 @@ from utils.forms.fields import (
 from utils.forms.widgets import APISelectMultiple, CustomNullBooleanSelect, StaticSelect
 
 from .enums import JobResultStatus
-from .models import IXAPI, ConfigContext, ExportTemplate, JobResult
+from .models import IXAPI, ConfigContext, ExportTemplate, JobResult, RipeIrr
 from .utils import FeatureQuery
 
 
@@ -116,3 +116,18 @@ class JobResultFilterForm(BootstrapMixin, forms.Form):
         choices=add_blank_choice(JobResultStatus),
         widget=StaticSelect(),
     )
+
+
+class RipeIrrForm(BootstrapMixin, forms.ModelForm):
+    class Meta:
+        model = RipeIrr
+        fields = ("name", "password")
+
+
+class RipeIrrFilterForm(BootstrapMixin, forms.Form):
+    model = RipeIrr
+    q = forms.CharField(required=False, label="Search")
+
+
+class RipeIrrEntityUpdateForm(BootstrapMixin, forms.Form):
+    ripe_irr = forms.ModelChoiceField(queryset=RipeIrr.objects.all(), label="RIPE IRR")

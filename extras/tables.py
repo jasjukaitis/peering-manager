@@ -18,6 +18,7 @@ from .models import (
     ConfigContextAssignment,
     ExportTemplate,
     JobResult,
+    RipeIrr,
 )
 
 
@@ -113,3 +114,12 @@ class JobResultTable(BaseTable):
             "data",
         )
         default_columns = ("created", "name", "user", "status", "data")
+
+
+class RipeIrrTable(BaseTable):
+    name = tables.Column(linkify=True)
+
+    class Meta(BaseTable.Meta):
+        model = RipeIrr
+        fields = ("name",)
+        default_columns = ("name",)
