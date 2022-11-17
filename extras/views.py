@@ -7,6 +7,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import View
 
+from peering.enums import DeviceStatus
 from peering.models import InternetExchange
 from peering.models.models import AutonomousSystem, InternetExchange
 from peering_manager.views.generics import (
@@ -343,7 +344,7 @@ class RipeIrrUpdateEntityView(PermissionRequiredMixin, View):
                         .select_related("ixp_connection")
                         .filter(
                             ixp_connection__internet_exchange_point_id=ixp.id,
-                            enabled=True,
+                            status=DeviceStatus.ENABLED,
                         )
                         .order_by("autonomous_system_id", "ip_address")
                         .distinct("autonomous_system_id", "ip_address")
