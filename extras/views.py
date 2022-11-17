@@ -229,7 +229,9 @@ class IXAPIView(ObjectView):
 
     def get_extra_context(self, request, instance):
         return {
-            "internet_exchange_points": InternetExchange.objects.filter(ixapi_endpoint=instance),
+            "internet_exchange_points": InternetExchange.objects.filter(
+                ixapi_endpoint=instance
+            ),
             "active_tab": "main",
         }
 
@@ -351,16 +353,24 @@ class RipeIrrUpdateEntityView(PermissionRequiredMixin, View):
                         version = ixp_peering_connection.ip_address.version
                         # Sanitize
                         irr_as_set = (
-                            single_as.irr_as_set.split(" ")[0].replace(",", "").split(":")[-1]
+                            single_as.irr_as_set.split(" ")[0]
+                            .replace(",", "")
+                            .split(":")[-1]
                         )
-                        if (single_as.asn, irr_as_set) in ixps[ixp.name][version]["import"]:
+                        if (single_as.asn, irr_as_set) in ixps[ixp.name][version][
+                            "import"
+                        ]:
                             continue
-                        ixps[ixp.name][version]["import"].append((single_as.asn, irr_as_set))
+                        ixps[ixp.name][version]["import"].append(
+                            (single_as.asn, irr_as_set)
+                        )
                         ixps[ixp.name][version]["export"].append(
                             (single_as.asn, instance.irr_as_set)
                         )
 
-        custom_body = [("remarks", "+---------------------------------------------------------+")]
+        custom_body = [
+            ("remarks", "+---------------------------------------------------------+")
+        ]
         for name, ixp in ixps.items():
             if ixp[4]["import"]:
                 custom_body.append(("remarks", f"| Peering {name} IPv4"))
@@ -372,7 +382,9 @@ class RipeIrrUpdateEntityView(PermissionRequiredMixin, View):
                 )
 
                 for from_as, accept_irr in ixp[4]["import"]:
-                    custom_body.append(("import", f"from AS{from_as} accept {accept_irr}"))
+                    custom_body.append(
+                        ("import", f"from AS{from_as} accept {accept_irr}")
+                    )
 
                 custom_body.append(("remarks", "+"))
 
