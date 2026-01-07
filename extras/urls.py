@@ -2,7 +2,7 @@ from django.urls import include, path
 
 from utils.urls import get_model_urls
 
-from . import views  # noqa: F401
+from . import views
 
 app_name = "extras"
 urlpatterns = [
@@ -82,5 +82,10 @@ urlpatterns = [
     path(
         "ripe-irr/<int:pk>/",
         include(get_model_urls(app_label="extras", model_name="ripeirr")),
+    ),
+    path(
+        "ripe-irr/update-entity/<int:pk>/",
+        views.ripeirr.RipeIrrUpdateEntityView.as_view(),
+        name="ripeirr_update_entity",
     ),
 ]

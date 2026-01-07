@@ -27,7 +27,7 @@ from ..utils import FeatureQuery
 if TYPE_CHECKING:
     from django.contrib.auth.models import User
 
-__all__ = ("ExportTemplate", "JournalEntry", "Webhook")
+__all__ = ("ExportTemplate", "JournalEntry", "RipeIrr", "Webhook")
 
 
 class ExportTemplate(SynchronisedDataMixin, ChangeLoggedModel):
