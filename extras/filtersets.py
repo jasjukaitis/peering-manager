@@ -17,6 +17,7 @@ from .models import (
     ConfigContextAssignment,
     ExportTemplate,
     JournalEntry,
+    RipeIrr,
     Tag,
     Webhook,
 )
@@ -27,6 +28,7 @@ __all__ = (
     "ExportTemplateFilterSet",
     "IXAPIFilterSet",
     "JournalEntryFilterSet",
+    "RipeIrrFilterSet",
     "TagFilterSet",
     "WebhookFilterSet",
 )
@@ -176,3 +178,14 @@ class WebhookFilterSet(BaseFilterSet):
             "ssl_verification",
             "ca_file_path",
         ]
+
+
+class RipeIrrFilterSet(django_filters.FilterSet):
+    q = django_filters.CharFilter(method="search", label="Search")
+
+    class Meta:
+        model = RipeIrr
+        fields = ["id", "name"]
+
+    def search(self, queryset, name, value):
+        return queryset
