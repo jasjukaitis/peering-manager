@@ -153,7 +153,7 @@ class RipeIrr(ChangeLoggedModel):
         return f"RIPE IRR {self.name}"
 
     def get_absolute_url(self):
-        return reverse("extras:ripeirr_details", args=[self.pk])
+        return reverse("extras:ripeirr", args=[self.pk])
 
 
 class Webhook(ChangeLoggedModel):
